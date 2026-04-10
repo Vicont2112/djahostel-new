@@ -13,9 +13,14 @@ import type { NextConfig } from "next";
  *    для статики можна `location /_next/static` кешувати довго.
  * 6. Після збірки переконайтесь, що `public/` і `.next/static` лежать поруч
  *    з `standalone` так, як очікує Next (див. офіційну документацію standalone).
+ *
+ * Vercel: під час збірки виставлено `VERCEL=1` — `standalone` вимикається,
+ * інакше сторінка на vercel.app може бути порожньою / некоректною.
  */
+const onVercel = Boolean(process.env.VERCEL);
+
 const nextConfig: NextConfig = {
-  output: "standalone",
+  ...(!onVercel ? { output: "standalone" as const } : {}),
 
   images: {
     remotePatterns: [

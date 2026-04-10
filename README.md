@@ -13,6 +13,8 @@ npm run dev
 
 Відкрийте [http://localhost:3000](http://localhost:3000).
 
+Після `npm run build` **без** Vercel (у проєкті ввімкнено `output: 'standalone'` для VDS): продакшен локально запускайте `npm run start:standalone`, а не `next start` (див. попередження Next про standalone).
+
 ## Vercel (тестовий деплой)
 
 ### Варіант 1 — імпорт з GitHub (найпростіше)
