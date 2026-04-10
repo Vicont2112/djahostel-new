@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 const NAV = [
-  { href: "#rooms", label: "Комнаты" },
+  { href: "#trust", label: "Довіра" },
+  { href: "#rooms", label: "Кімнати" },
   { href: "#atmosphere", label: "Атмосфера" },
   { href: "#location", label: "Локація" },
 ] as const;

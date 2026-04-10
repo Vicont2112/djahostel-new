@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { useBooking } from "@/components/providers/BookingProvider";
 import { ROOMS_CATALOG } from "@/lib/rooms-catalog";
+import { bookingPrivacyNote, priceTiers } from "@/lib/site-content";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -84,11 +85,24 @@ export function BookingForm() {
           Бронювання
         </p>
         <p className="mt-2 text-sm text-muted sm:text-base">
-          Заповніть форму — заявка піде в Apps Script, коли налаштуєте
+          Тарифи за ніч:{" "}
+          {priceTiers.map((t, i) => (
+            <span key={t.label} className="whitespace-nowrap">
+              <span className="font-medium text-foreground">{t.price} грн</span>{" "}
+              <span className="text-muted">({t.label})</span>
+              {i < priceTiers.length - 1 ? " · " : ""}
+            </span>
+          ))}
+          . Після надсилання{" "}
+          <span className="text-foreground">{"зв'яжемося"}</span> з вами
+          напряму. Заявка потрапить у HostelDesk/таблицю, коли налаштовано{" "}
           <code className="mx-1 rounded bg-olive-muted/40 px-1 text-xs">
             SHEETS_WEBAPP_BASE_URL
           </code>
-          . Зараз у демо режимі відповідь успішна без запису в таблицю.
+          ; у демо референс генерується без запису.
+        </p>
+        <p className="mt-3 text-xs leading-relaxed text-muted">
+          {bookingPrivacyNote}
         </p>
 
         <form

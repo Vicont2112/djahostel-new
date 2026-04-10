@@ -3,14 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import type { UIMessage } from "ai";
 import { useCallback, useState } from "react";
-
-const CHIPS_UK = [
-  "Є місця на ці дати?",
-  "Скільки коштує приватна кімната?",
-  "Як добратися від вокзалу?",
-  "Правила заселення",
-  "Що поруч?",
-];
+import { chatChips } from "@/lib/site-content";
 
 function partsToText(parts: UIMessage["parts"]): string {
   if (!parts?.length) return "";
@@ -101,7 +94,7 @@ export function FloatingChat() {
         </div>
 
         <div className="flex flex-wrap gap-1.5 border-t border-olive-muted/35 bg-olive-muted/15 px-3 py-2.5">
-          {CHIPS_UK.map((c) => (
+          {chatChips.map((c) => (
             <button
               key={c}
               type="button"

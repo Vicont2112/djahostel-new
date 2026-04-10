@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
+import { siteMeta } from "@/lib/site-content";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -15,9 +16,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "DJA Hostel — спокійний дім у центрі Києва",
-  description:
-    "Хостел з високими стелями та домашньою атмосферою. Довгі зупинки, чисті кімнати, пряме бронювання.",
+  title: siteMeta.title,
+  description: siteMeta.description,
 };
 
 export default function RootLayout({

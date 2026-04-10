@@ -1,20 +1,28 @@
 import type { AvailabilityResult, IsoDate } from "@/lib/sheets-client";
 
+/** Базова ціна 1–6 ночей з маркетинг-бази; реальні знижки за довгі періоди — у Sheets. */
+const NIGHTLY_SHORT_STAY = 350;
+
 const MOCK_ROOMS = [
   {
-    id: "dorm-6",
-    name: "Спальне місце в 6-місному номері",
-    pricePerNight: 450,
+    id: "female-4a",
+    name: "Жіночий номер (4 ліжка)",
+    pricePerNight: NIGHTLY_SHORT_STAY,
   },
   {
-    id: "dorm-4",
-    name: "Місце в 4-місному номері",
-    pricePerNight: 520,
+    id: "female-4b",
+    name: "Жіночий номер (4 ліжка), друга кімната",
+    pricePerNight: NIGHTLY_SHORT_STAY,
   },
   {
-    id: "private-twin",
-    name: "Двомісний номер (private)",
-    pricePerNight: 1200,
+    id: "male-8",
+    name: "Чоловічий номер (8 ліжок)",
+    pricePerNight: NIGHTLY_SHORT_STAY,
+  },
+  {
+    id: "mixed-8",
+    name: "Змішаний номер (8 ліжок)",
+    pricePerNight: NIGHTLY_SHORT_STAY,
   },
 ] as const;
 

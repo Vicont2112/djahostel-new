@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { LocationSection } from "@/components/location/LocationSection";
 import { BookingProvider } from "@/components/providers/BookingProvider";
 import { RoomsSection } from "@/components/rooms/RoomsSection";
+import { TrustSection } from "@/components/trust/TrustSection";
 import { VibeStrip } from "@/components/vibe/VibeStrip";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <SiteHeader />
         <HeroSection />
         <VibeStrip />
+        <TrustSection />
         <RoomsSection />
         <BookingForm />
         <LocationSection />

@@ -1,6 +1,7 @@
 /**
  * Статичний каталог кімнат (копірайт, фото).
  * id мають збігатися з рядками в /api/availability (mock або Sheets).
+ * Типологія — з маркетинг-бази Dja Hostel (4 кімнати, 24 ліжка).
  */
 export type RoomCatalogEntry = {
   id: string;
@@ -13,28 +14,36 @@ export type RoomCatalogEntry = {
 
 export const ROOMS_CATALOG: RoomCatalogEntry[] = [
   {
-    id: "dorm-6",
-    name: "Місце в 6-місному номері",
+    id: "female-4a",
+    name: "Жіночий номер (4 ліжка)",
     shortDescription:
-      "Світло, високі стелі, зручні ліжка — зручно для тих, хто зупиняється надовго.",
-    imageSrc: "/media/rooms/dorm-6.jpg",
-    capacityLabel: "до 6 гостей",
-  },
-  {
-    id: "dorm-4",
-    name: "Місце в 4-місному номері",
-    shortDescription:
-      "Трохи менше людей у кімнаті — більше тиші, та сама домашня атмосфера.",
+      "Окремий жіночий простір, двоярусні ліжка, ортопедичні матраци, розетки біля більшості місць.",
     imageSrc: "/media/rooms/dorm-4.jpg",
-    capacityLabel: "до 4 гостей",
+    capacityLabel: "4 місця",
   },
   {
-    id: "private-twin",
-    name: "Двомісний номер (private)",
+    id: "female-4b",
+    name: "Жіночий номер (4 ліжка), друга кімната",
     shortDescription:
-      "Окрема кімната на двох — для пари або друзів, які хочуть приватності.",
-    imageSrc: "/media/rooms/private-twin.jpg",
-    capacityLabel: "2 гості",
+      "Такий самий затишний жіночий номер — у будинку дві чотири місні кімнати для жінок.",
+    imageSrc: "/media/rooms/dorm-4.jpg",
+    capacityLabel: "4 місця",
+  },
+  {
+    id: "male-8",
+    name: "Чоловічий номер (8 ліжок)",
+    shortDescription:
+      "Чоловічий dorm на вісім місць — для тих, хто цінує окремий простір без змішаного заселення.",
+    imageSrc: "/media/rooms/dorm-6.jpg",
+    capacityLabel: "8 місць",
+  },
+  {
+    id: "mixed-8",
+    name: "Змішаний номер (8 ліжок)",
+    shortDescription:
+      "Загальний змішаний номер: PlayStation і книги — в спільній зоні, тут переважно сон і відпочинок.",
+    imageSrc: "/media/rooms/dorm-6.jpg",
+    capacityLabel: "8 місць",
   },
 ];
 

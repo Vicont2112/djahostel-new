@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { vibeStripCaption } from "@/lib/site-content";
 
 /** Локальні фото з `public/media/gallery` (скопійовано з djahostel-site). */
 const STRIP_IMAGES = [
@@ -23,6 +24,9 @@ export function VibeStrip() {
       aria-label="Атмосфера хостелу"
       className="border-y border-olive-muted/40 bg-card/60 py-10 sm:py-14"
     >
+      <p className="mx-auto mb-6 max-w-3xl px-4 text-center text-sm leading-relaxed text-muted sm:px-6">
+        {vibeStripCaption}
+      </p>
       <div className="vibe-scroll flex gap-4 overflow-x-auto px-4 pb-1 pt-1 sm:gap-5 sm:px-6">
         {STRIP_IMAGES.map((src) => (
           <figure
