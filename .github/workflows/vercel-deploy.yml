@@ -1,0 +1,27 @@
+# Потрібні GitHub Secrets (Settings → Secrets → Actions):
+#   VERCEL_TOKEN      — https://vercel.com/account/tokens
+#   VERCEL_ORG_ID     — Team / Hobby: Settings → General (або з `npx vercel project ls`)
+#   VERCEL_PROJECT_ID — створіть порожній проєкт на Vercel → Settings → General
+#
+# Після додавання секретів: вкладка Actions → workflow «Deploy to Vercel» → Run workflow.
+# (Автопуш у main без секретів дав би помилку — тому лише ручний запуск.)
+
+name: Deploy to Vercel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          working-directory: ./

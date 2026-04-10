@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DJA Hostel — сайт (Next.js 15)
 
-## Getting Started
+Маркетинговий сайт хостелу: hero, атмосфера, кімнати, форма бронювання (Apps Script за бажанням), AI-чат (мок).
 
-First, run the development server:
+**Репозиторій:** [github.com/Vicont2112/djahostel-new](https://github.com/Vicont2112/djahostel-new)
+
+## Локально
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Відкрийте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vercel (тестовий деплой)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Варіант 1 — імпорт з GitHub (найпростіше)
 
-## Learn More
+1. Відкрийте [**Import на Vercel**](https://vercel.com/new/import?framework=nextjs&hasDeploymentSource=github&repository-url=https%3A%2F%2Fgithub.com%2FVicont2112%2Fdjahostel-new).
+2. Увійдіть у Vercel → оберіть репозиторій `Vicont2112/djahostel-new` → **Deploy**.
+3. За потреби додайте **Environment Variables**: `SHEETS_WEBAPP_BASE_URL`, `SHEETS_WEBAPP_SECRET` (див. `.env.example`).
 
-To learn more about Next.js, take a look at the following resources:
+### Варіант 2 — GitHub Actions (деплой з кнопки в Actions)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. На [vercel.com](https://vercel.com) створіть проєкт (або після першого імпорту з GitHub скопіюйте ID з **Settings → General**).
+2. [Tokens](https://vercel.com/account/tokens) — створіть **token**.
+3. У репозиторії GitHub: **Settings → Secrets and variables → Actions** — додайте:
+   - `VERCEL_TOKEN`
+   - `VERCEL_ORG_ID`
+   - `VERCEL_PROJECT_ID`
+4. Вкладка **Actions** → workflow **Deploy to Vercel** → **Run workflow** (ручний запуск після налаштування секретів).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Git push (якщо HTTP 400 на великому пакеті)
 
-## Deploy on Vercel
+```bash
+git config http.postBuffer 524288000
+git config http.version HTTP/1.1
+git push
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Self-host (VDS)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+У `next.config.ts` увімкнено `output: 'standalone'` — див. коментарі в файлі для PM2 + Nginx.
