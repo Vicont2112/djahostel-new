@@ -93,6 +93,22 @@ export const externalCta = {
   replyHint: "У Telegram зазвичай відповідаємо протягом ~15 хвилин.",
 } as const;
 
+/** Відеоогляд (файл з `djahostel-site/Curs_Dja_Site/public/video/`, стиснута версія для вебу). */
+export const videoAsset = {
+  src: "/video/IMG_2148_web.mp4",
+  poster: "/media/gallery/4.jpg",
+} as const;
+
+export const videoTourCopy = {
+  eyebrow: "Відеоогляд",
+  title: "Подивіться простір до приїзду",
+  caption:
+    "Короткий ролик по дому: світло, кімнати, загальні зони. Звук — лише за вашим вибором (спочатку без звуку, як у соцмережах).",
+  playLabel: "Увімкнути відео",
+  soundOn: "Увімкнути звук",
+  soundOff: "Вимкнути звук",
+} as const;
+
 export const chatChips = [
   "Є місця на ці дати?",
   "Ціни за тиждень і за місяць",

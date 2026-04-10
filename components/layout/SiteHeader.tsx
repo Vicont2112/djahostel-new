@@ -4,6 +4,7 @@ const NAV = [
   { href: "#trust", label: "Довіра" },
   { href: "#rooms", label: "Кімнати" },
   { href: "#atmosphere", label: "Атмосфера" },
+  { href: "#video-tour", label: "Відео" },
   { href: "#location", label: "Локація" },
 ] as const;
 
