@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  /* Тепла база: більше повітря, менше контрасту */
+  --background: #f5f0e6;
+  --foreground: #3a3834;
+  --muted: #6f6a62;
+  --card: #fdfbf6;
+  /* М’який терракот — не кричущий CTA */
+  --accent: #b86f5c;
+  --accent-hover: #a46252;
+  --accent-muted: #e9ddd4;
+  /* Оливковий / приглушений зелений */
+  --olive: #5c6654;
+  --olive-muted: #dde3d6;
+  --olive-deep: #434c3d;
+  /* Спокійний «вуаль» поверх фото в Hero */
+  --hero-veil-from: rgba(62, 58, 52, 0.78);
+  --hero-veil-mid: rgba(62, 58, 52, 0.38);
+  --hero-veil-to: rgba(92, 102, 84, 0.22);
+  --ring: #7a8f72;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+  --color-olive: var(--olive);
+  --color-olive-muted: var(--olive-muted);
+  --color-olive-deep: var(--olive-deep);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), ui-serif, Georgia, serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns,
+  .ken-burns-slow {
+    animation: none !important;
+  }
+}
+
+@keyframes ken-burns-slow {
+  0% {
+    transform: scale(1.01) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.06) translate(-1%, -0.5%);
+  }
+}
+
+.ken-burns-slow {
+  animation: ken-burns-slow 48s ease-in-out infinite alternate;
+}
+
+.hero-veil {
+  background: linear-gradient(
+    to top,
+    var(--hero-veil-from) 0%,
+    var(--hero-veil-mid) 45%,
+    var(--hero-veil-to) 100%
+  );
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Горизонтальний скрол без «зламаного» скролбару в WebKit */
+.vibe-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--olive-muted) transparent;
+}
+.vibe-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.vibe-scroll::-webkit-scrollbar-thumb {
+  background: var(--olive-muted);
+  border-radius: 999px;
+}
