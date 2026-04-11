@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function SiteHeader() {
-  const { locale, setLocale, dict } = useLanguage();
+  const { locale, setLocale } = useLanguage();
 
   const NAV = [
     { href: "/#trust", label: locale === "ua" ? "Довіра" : "Trust" },

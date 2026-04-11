@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const GA_ID = "G-MPM30EPXQ8";
 
@@ -16,11 +18,6 @@ const lora = Lora({
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
 });
-
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-import { JsonLd } from "@/components/seo/JsonLd";
-
-const GA_ID = "G-MPM30EPXQ8";
 
 export const metadata: Metadata = {
   title: "Dja Hostel Київ — тихий хостел у центрі",

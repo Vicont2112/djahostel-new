@@ -1,5 +1,10 @@
+"use client";
+
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { useBooking } from "@/components/providers/BookingProvider";
 import { ROOMS_CATALOG } from "@/lib/rooms-catalog";
+import Image from "next/image";
+import Link from "next/link";
 
 export function RoomsSection() {
   const { dict, locale } = useLanguage();

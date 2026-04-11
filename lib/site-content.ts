@@ -251,3 +251,24 @@ export const address = {
 
 export type Locale = keyof typeof DICTIONARY;
 export const DEFAULT_LOCALE: Locale = "ua";
+
+export const videoAsset = {
+  src: "/video/korridor-raw.mp4",
+  poster: "/images/video-poster.jpg",
+} as const;
+
+export const videoTourCopy = {
+  eyebrow: "Live View",
+  title: "A single take of common spaces",
+  caption: "No wide lenses or aggressive color-correction. Just a regular morning coffee run.",
+  playLabel: "Play",
+  soundOn: "Sound On",
+  soundOff: "Sound Off"
+} as const;
+
+export const chatChips = [
+  "Які є кімнати?", 
+  "Де ви знаходитесь?", 
+  "Скільки коштує проживання?"
+];
+

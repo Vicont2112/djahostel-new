@@ -1,4 +1,7 @@
+"use client";
+
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import Image from "next/image";
 
 /** Локальні фото з `public/media/gallery` (скопійовано з djahostel-site). */
 const STRIP_IMAGES = [

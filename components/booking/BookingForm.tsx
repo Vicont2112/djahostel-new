@@ -3,6 +3,7 @@
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { useBooking } from "@/components/providers/BookingProvider";
 import { ROOMS_CATALOG } from "@/lib/rooms-catalog";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -221,11 +222,6 @@ export function BookingForm() {
           >
             {status === "submitting" ? dict.booking.submitting : dict.booking.submit}
           </button>
-        </form>
-      </div>
-    </section>
-  );
-}
         </form>
       </div>
     </section>

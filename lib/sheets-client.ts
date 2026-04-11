@@ -5,8 +5,6 @@
 
 const SHEETS_WEBAPP_BASE_URL =
   process.env.SHEETS_WEBAPP_BASE_URL ?? "";
-const SHEETS_WEBAPP_SECRET =
-  process.env.SHEETS_WEBAPP_SECRET ?? "";
 
 export type IsoDate = string;
 
@@ -45,22 +43,6 @@ export class SheetsClientError extends Error {
   }
 }
 
-async function fetchWebApp(
-  init?: RequestInit,
-): Promise<Response> {
-  if (!SHEETS_WEBAPP_BASE_URL) {
-    throw new SheetsClientError(
-      "SHEETS_WEBAPP_BASE_URL is not configured",
-      503,
-    );
-  }
-  const headers = new Headers(init?.headers);
-  if (SHEETS_WEBAPP_SECRET) {
-    headers.set("X-Webhook-Secret", SHEETS_WEBAPP_SECRET);
-  }
-  return fetch(SHEETS_WEBAPP_BASE_URL, { ...init, headers });
-}
-
 /**
  * Отримання шахматки (на 90 днів).
  */
@@ -71,14 +53,14 @@ export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult>
   if (!res.ok) {
     throw new SheetsClientError(`Availability request failed: ${res.status}`, res.status);
   }
-  
-  const data = (await res.json()) as any;
+  // @typescript-eslint/no-explicit-any
+  const data = (await res.json()) as { error?: string; rooms?: Array<{ roomId: string; roomName: string; available: boolean; pricePerNight: number; currency?: string; bookedDates?: string[] }> };
   if (data.error) {
     throw new SheetsClientError(data.error, 400);
   }
   
   // Мапимо поля з Apps Script (roomId, roomName) на наші (id, name)
-  const mappedRooms = (data.rooms || []).map((r: any) => ({
+  const mappedRooms = (data.rooms || []).map((r) => ({
     id: r.roomId,
     name: r.roomName,
     available: r.available,
@@ -116,8 +98,7 @@ export async function submitBookingToSheets(
   if (!res.ok) {
     throw new SheetsClientError(`Booking failed: ${res.status}`, res.status);
   }
-  
-  const data = (await res.json()) as any;
+  const data = (await res.json()) as { error?: string; success: boolean; bookingId?: string };
   if (data.error) {
     throw new SheetsClientError(data.error, 400);
   }
