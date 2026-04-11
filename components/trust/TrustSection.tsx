@@ -1,17 +1,11 @@
-import {
-  address,
-  contacts,
-  externalCta,
-  honestBlock,
-  priceTiers,
-  SITE_CONTENT_FILE,
-  SITE_CONTENT_SOURCE,
-  trustFacts,
-  trustQuotes,
-  valueBullets,
-} from "@/lib/site-content";
+"use client";
+
+import { useLanguage } from "@/components/providers/LanguageProvider";
+import { address, contacts } from "@/lib/site-content";
 
 export function TrustSection() {
+  const { dict, locale } = useLanguage();
+
   return (
     <section
       id="trust"
@@ -19,21 +13,14 @@ export function TrustSection() {
     >
       <div className="mx-auto max-w-6xl">
         <p className="font-serif text-2xl font-medium text-foreground sm:text-3xl">
-          Довіра й прозорість
+          {dict.trust.title}
         </p>
         <p className="mt-2 max-w-2xl text-sm text-muted sm:text-base">
-          Тексти й цифри збігаються з офіційним описом для платформ (
-          <span
-            className="font-mono text-xs text-muted"
-            title={SITE_CONTENT_SOURCE}
-          >
-            {SITE_CONTENT_FILE}
-          </span>
-          ).
+          {dict.trust.subtitle}
         </p>
 
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {valueBullets.map((line) => (
+          {dict.valueBullets.map((line) => (
             <li
               key={line}
               className="rounded-2xl border border-olive-muted/40 bg-background/80 px-4 py-3 text-sm leading-relaxed text-foreground"
@@ -45,26 +32,26 @@ export function TrustSection() {
 
         <div className="mt-10 flex flex-wrap gap-4 text-sm text-muted">
           <span className="rounded-full border border-olive-muted/50 bg-olive-muted/20 px-3 py-1">
-            Booking.com: {trustFacts.bookingRating}
+            Booking.com: {dict.trustFacts.bookingRating}
           </span>
           <span className="rounded-full border border-olive-muted/50 bg-olive-muted/20 px-3 py-1">
-            {trustFacts.longStayShare} гостей — довгі зупинки
+            {dict.trustFacts.longStayShare} {dict.trustFacts.stayLabel}
           </span>
           <span className="rounded-full border border-olive-muted/50 bg-olive-muted/20 px-3 py-1">
-            Тиша: {trustFacts.quietHours}
+            {dict.trustFacts.quietLabel}: {dict.trustFacts.quietHours}
           </span>
           <span className="rounded-full border border-olive-muted/50 bg-olive-muted/20 px-3 py-1">
-            {trustFacts.beds} ліжка в домі
+            {dict.trustFacts.beds} {dict.trustFacts.bedsLabel}
           </span>
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           <div>
             <h2 className="font-serif text-lg font-medium text-foreground">
-              Відгуки
+              {dict.trust.reviewsTitle}
             </h2>
             <ul className="mt-4 space-y-6">
-              {trustQuotes.map((q) => (
+              {dict.trustQuotes.map((q) => (
                 <li key={q.text}>
                   <blockquote className="border-l-2 border-olive-deep/50 pl-4 text-sm leading-relaxed text-foreground">
                     «{q.text}»
@@ -76,21 +63,21 @@ export function TrustSection() {
           </div>
           <div>
             <h2 className="font-serif text-lg font-medium text-foreground">
-              Ціни за ніч (грн)
+              {dict.trust.pricesTitle}
             </h2>
             <p className="mt-2 text-sm text-muted">
-              Довші періоди дешевші за ніч; точну суму підтвердимо в листуванні.
+              {dict.trust.priceNote}
             </p>
             <table className="mt-4 w-full max-w-md text-sm">
               <tbody>
-                {priceTiers.map((row) => (
+                {dict.priceTiers.map((row) => (
                   <tr
                     key={row.label}
                     className="border-b border-olive-muted/30 last:border-0"
                   >
                     <td className="py-2 pr-4 text-muted">{row.label}</td>
                     <td className="py-2 text-right font-medium text-foreground">
-                      {row.price} грн
+                      {row.price} {locale === "ua" ? "грн" : "UAH"}
                     </td>
                   </tr>
                 ))}
@@ -101,18 +88,18 @@ export function TrustSection() {
 
         <div className="mt-12 rounded-2xl border border-olive-muted/45 bg-background/90 p-6 sm:p-8">
           <h2 className="font-serif text-lg font-medium text-foreground">
-            {honestBlock.title}
+            {dict.honestBlock.title}
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
-            {honestBlock.body}
+            {dict.honestBlock.body}
           </p>
         </div>
 
         <div className="mt-10">
           <h2 className="font-serif text-lg font-medium text-foreground">
-            {"Зв'язок і бронювання"}
+            {dict.trust.contactTitle}
           </h2>
-          <p className="mt-2 text-sm text-muted">{externalCta.replyHint}</p>
+          <p className="mt-2 text-sm text-muted">{dict.trust.replyHint}</p>
           <div className="mt-4 flex flex-wrap gap-3">
             <a
               href={contacts.telegramUrl}
@@ -152,7 +139,7 @@ export function TrustSection() {
             </a>
           </div>
           <p className="mt-4 text-xs text-muted">
-            {address.line} · ~{address.walkMinutes} хв пішки від м. {address.metro}
+            {locale === "ua" ? address.lineUA : address.lineEN} · ~{address.walkMinutes} {locale === "ua" ? "хв пішки від м." : "min walk from"} {locale === "ua" ? address.metroUA : address.metroEN}
           </p>
         </div>
       </div>

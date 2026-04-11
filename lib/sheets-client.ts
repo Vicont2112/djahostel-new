@@ -46,7 +46,6 @@ export class SheetsClientError extends Error {
 }
 
 async function fetchWebApp(
-  path: string,
   init?: RequestInit,
 ): Promise<Response> {
   if (!SHEETS_WEBAPP_BASE_URL) {
@@ -55,51 +54,59 @@ async function fetchWebApp(
       503,
     );
   }
-  const url = new URL(path, SHEETS_WEBAPP_BASE_URL.replace(/\/$/, "") + "/");
   const headers = new Headers(init?.headers);
   if (SHEETS_WEBAPP_SECRET) {
     headers.set("X-Webhook-Secret", SHEETS_WEBAPP_SECRET);
   }
-  return fetch(url, { ...init, headers });
+  return fetch(SHEETS_WEBAPP_BASE_URL, { ...init, headers });
 }
 
 /**
- * Реальна реалізація: GET або POST згідно з вашим doGet/doPost у Apps Script.
- * Плейсхолдер — кинуть помилку, доки не задано SHEETS_WEBAPP_BASE_URL.
+ * Отримання шахматки (на 90 днів).
  */
-export async function fetchAvailabilityFromSheets(
-  checkIn: IsoDate,
-  checkOut: IsoDate,
-): Promise<AvailabilityResult> {
-  const res = await fetchWebApp(
-    `availability?checkIn=${encodeURIComponent(checkIn)}&checkOut=${encodeURIComponent(checkOut)}`,
-    { method: "GET", next: { revalidate: 60 } },
-  );
+export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult> {
+  const url = `${SHEETS_WEBAPP_BASE_URL}?action=getAvailability&groupBy=type`;
+  const res = await fetch(url, { method: "GET", next: { revalidate: 60 } });
+  
   if (!res.ok) {
-    throw new SheetsClientError(
-      `Availability request failed: ${res.status}`,
-      res.status,
-    );
+    throw new SheetsClientError(`Availability request failed: ${res.status}`, res.status);
   }
-  const data = (await res.json()) as AvailabilityResult;
+  
+  const data = (await res.json()) as any;
+  if (data.error) {
+    throw new SheetsClientError(data.error, 400);
+  }
+  
   return { ...data, source: "apps-script" };
 }
 
 /**
- * Відправка броні — формат тіла підлаштуйте під існуючий endpoint.
+ * Відправка броні.
  */
 export async function submitBookingToSheets(
   payload: BookingPayload,
 ): Promise<{ ok: boolean; reference?: string }> {
-  const res = await fetchWebApp("booking", {
+  const body = {
+    action: "createBooking",
+    ...payload,
+  };
+  
+  const res = await fetch(SHEETS_WEBAPP_BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(body),
   });
+  
   if (!res.ok) {
     throw new SheetsClientError(`Booking failed: ${res.status}`, res.status);
   }
-  return res.json() as Promise<{ ok: boolean; reference?: string }>;
+  
+  const data = (await res.json()) as any;
+  if (data.error) {
+    throw new SheetsClientError(data.error, 400);
+  }
+  
+  return { ok: data.success, reference: data.bookingId };
 }
 
 export function isSheetsConfigured(): boolean {

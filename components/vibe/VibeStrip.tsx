@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { vibeStripCaption } from "@/lib/site-content";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /** Локальні фото з `public/media/gallery` (скопійовано з djahostel-site). */
 const STRIP_IMAGES = [
@@ -18,6 +17,8 @@ const STRIP_IMAGES = [
  * Горизонтальна стрічка атмосфери: лише візуал, без підписів.
  */
 export function VibeStrip() {
+  const { dict } = useLanguage();
+
   return (
     <section
       id="atmosphere"
@@ -25,7 +26,7 @@ export function VibeStrip() {
       className="border-y border-olive-muted/40 bg-card/60 py-10 sm:py-14"
     >
       <p className="mx-auto mb-6 max-w-3xl px-4 text-center text-sm leading-relaxed text-muted sm:px-6">
-        {vibeStripCaption}
+        {dict.vibeStrip.caption}
       </p>
       <div className="vibe-scroll flex gap-4 overflow-x-auto px-4 pb-1 pt-1 sm:gap-5 sm:px-6">
         {STRIP_IMAGES.map((src) => (

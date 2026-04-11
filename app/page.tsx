@@ -8,19 +8,24 @@ import { TrustSection } from "@/components/trust/TrustSection";
 import { VideoTourSection } from "@/components/video/VideoTourSection";
 import { VibeStrip } from "@/components/vibe/VibeStrip";
 
+import { Footer } from "@/components/layout/Footer";
+
 export default function Home() {
   return (
     <BookingProvider>
-      <main className="min-h-dvh">
-        <SiteHeader />
-        <HeroSection />
-        <VibeStrip />
-        <VideoTourSection />
-        <TrustSection />
-        <RoomsSection />
-        <BookingForm />
-        <LocationSection />
-      </main>
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow">
+          <SiteHeader />
+          <HeroSection />
+          <VibeStrip />
+          <VideoTourSection />
+          <TrustSection />
+          <RoomsSection />
+          <BookingForm />
+          <LocationSection />
+        </main>
+        <Footer />
+      </div>
     </BookingProvider>
   );
 }

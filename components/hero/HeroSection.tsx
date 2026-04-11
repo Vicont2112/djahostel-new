@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { MiniCalendar } from "@/components/booking/MiniCalendar";
 import { useBooking } from "@/components/providers/BookingProvider";
-import { heroCopy } from "@/lib/site-content";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 const HERO_IMAGE = "/media/hero/hero.jpg";
 
 export function HeroSection() {
+  const { dict, locale } = useLanguage();
   const {
     checkIn,
     checkOut,
@@ -40,13 +41,13 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-14 pt-8 sm:gap-12 sm:px-8 sm:pb-20 sm:pt-12 md:gap-14 md:pb-24">
         <div className="max-w-xl md:max-w-2xl">
           <p className="mb-3 text-xs font-normal uppercase tracking-[0.2em] text-[#f0ebe3]/90 sm:text-sm">
-            {heroCopy.eyebrow}
+            {dict.hero.eyebrow}
           </p>
           <h1 className="font-serif text-[1.65rem] font-medium leading-snug text-[#faf8f4] sm:text-4xl md:text-[2.65rem] md:leading-tight">
-            {heroCopy.title}
+            {dict.hero.title}
           </h1>
           <p className="mt-5 max-w-md text-base font-normal leading-relaxed text-[#ebe6dc]/95 sm:text-lg">
-            {heroCopy.subtitle}
+            {dict.hero.subtitle}
           </p>
         </div>
 
@@ -58,22 +59,22 @@ export function HeroSection() {
         />
 
         <div className="min-h-[2.75rem] text-sm leading-relaxed text-[#e8e3da]/90">
-          {loading && <p>Глядаємо вільні місця…</p>}
+          {loading && <p>{locale === "ua" ? "Глядаємо вільні місця…" : "Checking availability…"}</p>}
           {error && <p className="text-[#f5d4c8]">{error}</p>}
           {!loading && !error && availability && (
             <p>
               {freeCount > 0 ? (
                 <>
-                  На обрані дати є варіанти:{" "}
+                  {locale === "ua" ? "На обрані дати є варіанти: " : "Options available for these dates: "}
                   <span className="font-medium text-[#faf8f4]">
-                    {freeCount} з {availability.rooms.length}
+                    {freeCount} {locale === "ua" ? "з" : "of"} {availability.rooms.length}
                   </span>
                   {availability.source === "mock" && (
-                    <span className="text-[#dcd5c9]/80"> (демо)</span>
+                    <span className="text-[#dcd5c9]/80"> ({locale === "ua" ? "демо" : "demo"})</span>
                   )}
                 </>
               ) : (
-                <>На ці дати в демо немає вільних місць — спробуйте інші дати.</>
+                <>{locale === "ua" ? "На ці дати в демо немає вільних місць — спробуйте інші дати." : "No availability for these dates in demo — try other dates."}</>
               )}
             </p>
           )}

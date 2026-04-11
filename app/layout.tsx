@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
 import { DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
-import { siteMeta } from "@/lib/site-content";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+
+const GA_ID = "G-MPM30EPXQ8";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -15,9 +17,14 @@ const lora = Lora({
   weight: ["400", "500", "600", "700"],
 });
 
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { JsonLd } from "@/components/seo/JsonLd";
+
+const GA_ID = "G-MPM30EPXQ8";
+
 export const metadata: Metadata = {
-  title: siteMeta.title,
-  description: siteMeta.description,
+  title: "Dja Hostel Київ — тихий хостел у центрі",
+  description: "Тихий хостел у центрі Києва, ~12 хв від м. Золоті Ворота. Спокійно після 22:00, власник поруч.",
 };
 
 export default function RootLayout({
@@ -30,7 +37,11 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${lora.variable} font-sans antialiased`}
       >
-        {children}
+        <GoogleAnalytics gaId={GA_ID} />
+        <LanguageProvider>
+          <JsonLd />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
