@@ -1,5 +1,4 @@
 import { BookingForm } from "@/components/booking/BookingForm";
-import { FloatingChat } from "@/components/chat/FloatingChat";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { LocationSection } from "@/components/location/LocationSection";
@@ -21,7 +20,6 @@ export default function Home() {
         <RoomsSection />
         <BookingForm />
         <LocationSection />
-        <FloatingChat />
       </main>
     </BookingProvider>
   );
