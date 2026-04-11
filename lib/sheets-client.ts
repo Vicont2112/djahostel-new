@@ -77,7 +77,23 @@ export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult>
     throw new SheetsClientError(data.error, 400);
   }
   
-  return { ...data, source: "apps-script" };
+  // Мапимо поля з Apps Script (roomId, roomName) на наші (id, name)
+  const mappedRooms = (data.rooms || []).map((r: any) => ({
+    id: r.roomId,
+    name: r.roomName,
+    available: r.available,
+    pricePerNight: r.pricePerNight,
+    currency: r.currency || "UAH",
+    bookedDates: r.bookedDates || []
+  }));
+
+  return { 
+    rooms: mappedRooms, 
+    source: "apps-script",
+    // Додаємо плейсхолдери для дат, якщо вони потрібні інтерфейсу
+    checkIn: "", 
+    checkOut: ""
+  } as AvailabilityResult;
 }
 
 /**
