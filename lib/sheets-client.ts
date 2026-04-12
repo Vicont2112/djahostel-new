@@ -43,51 +43,88 @@ export class SheetsClientError extends Error {
   }
 }
 
-// Мапа для перекладу кімнат між Google Sheets та Frontend
-const FRONTEND_TO_SHEETS: Record<string, string> = {
-  "female-4a": "Персик",
-  "female-4b": "Зелёная",
-  "male-8": "Бордо",
-  "mixed-8": "Синяя"
+/**
+ * Маппинг префіксу ліжка → id фронтенду.
+ * П-1..П-4 = Персик = female-4a
+ * З-1..З-4 = Зелёная = female-4b
+ * Б-1..Б-8 = Бордо = male-8
+ * С-1..С-8 = Синяя = mixed-8
+ */
+const BED_PREFIX_TO_ROOM: Record<string, { frontendId: string; name: string }> = {
+  "П": { frontendId: "female-4a", name: "Персик" },
+  "З": { frontendId: "female-4b", name: "Зелёная" },
+  "Б": { frontendId: "male-8", name: "Бордо" },
+  "С": { frontendId: "mixed-8", name: "Синяя" },
 };
 
-const SHEETS_TO_FRONTEND: Record<string, string> = {
-  "Персик": "female-4a",
-  "Зелёная": "female-4b",
-  "Бордо": "male-8",
-  "Синяя": "mixed-8"
-};
+function getBedPrefix(roomName: string): string {
+  // "П-1 (r1)" → "П", "З-3" → "З"
+  const m = roomName.match(/^([А-ЯA-Z])/i);
+  return m ? m[1].toUpperCase() : roomName;
+}
 
 /**
  * Отримання шахматки (на 90 днів).
+ * API повертає 24 окремих ліжка — агрегуємо в 4 кімнати.
  */
 export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult> {
-  const url = `${SHEETS_WEBAPP_BASE_URL}?action=getAvailability&groupBy=type`;
+  // Fetch individual beds (no groupBy)
+  const url = `${SHEETS_WEBAPP_BASE_URL}?action=getAvailability`;
   const res = await fetch(url, { method: "GET", next: { revalidate: 60 } });
   
   if (!res.ok) {
     throw new SheetsClientError(`Availability request failed: ${res.status}`, res.status);
   }
-  // @typescript-eslint/no-explicit-any
-  const data = (await res.json()) as { error?: string; rooms?: Array<{ roomId: string; roomName: string; available: boolean; pricePerNight: number; currency?: string; bookedDates?: string[] }> };
+  const data = (await res.json()) as { 
+    error?: string; 
+    rooms?: Array<{ roomId: string; roomName: string; available: boolean; pricePerNight: number; bookedDates?: string[] }>;
+    debug?: { roomsCount: number; bookingsCount: number };
+  };
   if (data.error) {
     throw new SheetsClientError(data.error, 400);
   }
   
-  // Мапимо поля з Apps Script (roomId="Персик") на наші (id="female-4a")
-  const mappedRooms = (data.rooms || []).map((r) => ({
-    id: SHEETS_TO_FRONTEND[r.roomId] || r.roomId,
-    name: r.roomName,
-    available: r.available,
-    pricePerNight: r.pricePerNight,
-    currency: r.currency || "UAH",
-    bookedDates: r.bookedDates || []
+  // Aggregate 24 beds → 4 rooms
+  const roomGroups: Record<string, { 
+    frontendId: string; name: string; 
+    totalBeds: number; availableBeds: number; 
+    price: number; allBookedDates: string[] 
+  }> = {};
+  
+  for (const bed of (data.rooms || [])) {
+    const prefix = getBedPrefix(bed.roomName);
+    const mapping = BED_PREFIX_TO_ROOM[prefix];
+    if (!mapping) continue;
+    
+    if (!roomGroups[mapping.frontendId]) {
+      roomGroups[mapping.frontendId] = {
+        frontendId: mapping.frontendId,
+        name: mapping.name,
+        totalBeds: 0,
+        availableBeds: 0,
+        price: bed.pricePerNight,
+        allBookedDates: [],
+      };
+    }
+    const grp = roomGroups[mapping.frontendId];
+    grp.totalBeds++;
+    if (bed.available) grp.availableBeds++;
+    if (bed.bookedDates) grp.allBookedDates.push(...bed.bookedDates);
+  }
+  
+  const mappedRooms = Object.values(roomGroups).map((grp) => ({
+    id: grp.frontendId,
+    name: grp.name,
+    available: grp.availableBeds > 0,
+    pricePerNight: grp.price,
+    currency: "UAH",
+    totalBeds: grp.totalBeds,
+    availableBeds: grp.availableBeds,
   }));
 
   return { 
     rooms: mappedRooms, 
     source: "apps-script",
-    // Додаємо плейсхолдери для дат, якщо вони потрібні інтерфейсу
     checkIn: "", 
     checkOut: ""
   } as AvailabilityResult;
@@ -99,10 +136,16 @@ export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult>
 export async function submitBookingToSheets(
   payload: BookingPayload,
 ): Promise<{ ok: boolean; reference?: string }> {
+  // Зворотнє мапування: "female-4a" -> "Персик"
+  const FRONTEND_TO_SHEETS: Record<string, string> = {
+    "female-4a": "Персик",
+    "female-4b": "Зелёная",
+    "male-8": "Бордо",
+    "mixed-8": "Синяя"
+  };
   const body = {
     action: "createBooking",
     ...payload,
-    // Зворотнє мапування: "female-4a" -> "Персик"
     roomId: FRONTEND_TO_SHEETS[payload.roomId] || payload.roomId
   };
   

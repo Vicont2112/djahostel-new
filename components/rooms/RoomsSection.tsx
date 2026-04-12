@@ -87,7 +87,9 @@ export function RoomsSection() {
                             : "mt-1 text-xs font-medium text-accent"
                         }
                       >
-                        {available ? dict.roomsSection.available : dict.roomsSection.booked}
+                        {available
+                          ? `${(live as Record<string, unknown>)?.availableBeds ?? "?"} ${locale === "ua" ? "з" : "of"} ${(live as Record<string, unknown>)?.totalBeds ?? "?"} ${dict.roomsSection.available}`
+                          : dict.roomsSection.booked}
                       </p>
                     </div>
                     <Link
