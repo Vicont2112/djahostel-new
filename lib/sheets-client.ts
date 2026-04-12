@@ -43,6 +43,21 @@ export class SheetsClientError extends Error {
   }
 }
 
+// Мапа для перекладу кімнат між Google Sheets та Frontend
+const FRONTEND_TO_SHEETS: Record<string, string> = {
+  "female-4a": "Персик",
+  "female-4b": "Зелёная",
+  "male-8": "Бордо",
+  "mixed-8": "Синяя"
+};
+
+const SHEETS_TO_FRONTEND: Record<string, string> = {
+  "Персик": "female-4a",
+  "Зелёная": "female-4b",
+  "Бордо": "male-8",
+  "Синяя": "mixed-8"
+};
+
 /**
  * Отримання шахматки (на 90 днів).
  */
@@ -59,9 +74,9 @@ export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult>
     throw new SheetsClientError(data.error, 400);
   }
   
-  // Мапимо поля з Apps Script (roomId, roomName) на наші (id, name)
+  // Мапимо поля з Apps Script (roomId="Персик") на наші (id="female-4a")
   const mappedRooms = (data.rooms || []).map((r) => ({
-    id: r.roomId,
+    id: SHEETS_TO_FRONTEND[r.roomId] || r.roomId,
     name: r.roomName,
     available: r.available,
     pricePerNight: r.pricePerNight,
@@ -87,6 +102,8 @@ export async function submitBookingToSheets(
   const body = {
     action: "createBooking",
     ...payload,
+    // Зворотнє мапування: "female-4a" -> "Персик"
+    roomId: FRONTEND_TO_SHEETS[payload.roomId] || payload.roomId
   };
   
   const res = await fetch(SHEETS_WEBAPP_BASE_URL, {
