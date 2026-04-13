@@ -18,7 +18,7 @@ export const ROOMS_CATALOG: RoomCatalogEntry[] = [
     name: "Жіночий номер (4 ліжка)",
     shortDescription:
       "Окремий жіночий простір, двоярусні ліжка, ортопедичні матраци, розетки біля більшості місць.",
-    imageSrc: "/media/rooms/dorm-4.jpg",
+    imageSrc: "/media/rooms/women1-1.jpg",
     capacityLabel: "4 місця",
   },
   {
@@ -26,7 +26,7 @@ export const ROOMS_CATALOG: RoomCatalogEntry[] = [
     name: "Жіночий номер (4 ліжка), друга кімната",
     shortDescription:
       "Такий самий затишний жіночий номер — у будинку дві чотири місні кімнати для жінок.",
-    imageSrc: "/media/rooms/dorm-4.jpg",
+    imageSrc: "/media/rooms/women2-1.jpg",
     capacityLabel: "4 місця",
   },
   {
@@ -34,7 +34,7 @@ export const ROOMS_CATALOG: RoomCatalogEntry[] = [
     name: "Чоловічий номер (8 ліжок)",
     shortDescription:
       "Чоловічий dorm на вісім місць — для тих, хто цінує окремий простір без змішаного заселення.",
-    imageSrc: "/media/rooms/dorm-6.jpg",
+    imageSrc: "/media/rooms/men4-1.jpg",
     capacityLabel: "8 місць",
   },
   {
@@ -42,7 +42,7 @@ export const ROOMS_CATALOG: RoomCatalogEntry[] = [
     name: "Змішаний номер (8 ліжок)",
     shortDescription:
       "Загальний змішаний номер: PlayStation і книги — в спільній зоні, тут переважно сон і відпочинок.",
-    imageSrc: "/media/rooms/dorm-6.jpg",
+    imageSrc: "/media/rooms/men3-1.jpg",
     capacityLabel: "8 місць",
   },
 ];
