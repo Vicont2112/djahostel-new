@@ -6,11 +6,9 @@ import { LocationSection } from "@/components/location/LocationSection";
 import { ManifestoSection } from "@/components/manifesto/ManifestoSection";
 import { BookingProvider } from "@/components/providers/BookingProvider";
 import { RoomsSection } from "@/components/rooms/RoomsSection";
-import { StayStorySection } from "@/components/story/StayStorySection";
+import { HostSection } from "@/components/host/HostSection";
 import { TrustSection } from "@/components/trust/TrustSection";
 import { VideoTourSection } from "@/components/video/VideoTourSection";
-import { VibeStrip } from "@/components/vibe/VibeStrip";
-
 import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
@@ -20,13 +18,12 @@ export default function Home() {
         <main className="flex-grow">
           <SiteHeader />
           <HeroSection />
-          <StayStorySection />
-          <VibeStrip />
           <ForWhomSection />
-          <ManifestoSection />
+          <HostSection />
           <VideoTourSection />
-          <TrustSection />
+          <ManifestoSection />
           <RoomsSection />
+          <TrustSection />
           <BookingForm />
           <LocationSection />
         </main>

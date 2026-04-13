@@ -6,8 +6,13 @@ export function ForWhomSection() {
   const { dict } = useLanguage();
 
   return (
-    <section className="scroll-mt-20 border-b border-olive-muted/30 bg-background px-4 py-16 sm:px-6 sm:py-20">
+    <section className="scroll-mt-20 border-b border-olive-muted/30 bg-background px-4 py-16 sm:px-6 sm:py-20 text-center sm:text-left">
       <div className="mx-auto max-w-4xl">
+        {(dict.forWhom as any).introSharing && (
+          <p className="mb-12 font-serif text-xl italic leading-relaxed text-foreground md:text-2xl">
+            {(dict.forWhom as any).introSharing}
+          </p>
+        )}
         <div className="grid gap-10 sm:grid-cols-2">
           {/* YES column */}
           <div>

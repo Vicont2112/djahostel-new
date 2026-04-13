@@ -49,6 +49,11 @@ export function HeroSection() {
           <p className="mt-5 max-w-md text-base font-normal leading-relaxed text-[#ebe6dc]/95 sm:text-lg">
             {dict.hero.subtitle}
           </p>
+          {(dict.hero as any).warmIntro && (
+            <p className="mt-6 max-w-lg font-serif text-lg italic leading-relaxed text-[#f4d03f]/80 sm:text-xl">
+              {(dict.hero as any).warmIntro}
+            </p>
+          )}
         </div>
 
         <MiniCalendar
