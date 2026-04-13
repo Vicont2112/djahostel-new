@@ -4,7 +4,9 @@
  */
 
 const SHEETS_WEBAPP_BASE_URL =
-  process.env.SHEETS_WEBAPP_BASE_URL ?? "";
+  process.env.SHEETS_WEBAPP_BASE_URL ||
+  process.env.NEXT_PUBLIC_SHEETS_WEBAPP_BASE_URL ||
+  "";
 
 export type IsoDate = string;
 
