@@ -52,9 +52,9 @@ export class SheetsClientError extends Error {
  */
 const BED_PREFIX_TO_ROOM: Record<string, { frontendId: string; name: string }> = {
   "П": { frontendId: "female-4a", name: "Персик" },
-  "З": { frontendId: "female-4b", name: "Зелёная" },
+  "З": { frontendId: "female-4b", name: "Зелена" },
   "Б": { frontendId: "male-8", name: "Бордо" },
-  "С": { frontendId: "mixed-8", name: "Синяя" },
+  "С": { frontendId: "mixed-8", name: "Синя" },
 };
 
 function getBedPrefix(roomName: string): string {
@@ -139,9 +139,9 @@ export async function submitBookingToSheets(
   // Зворотнє мапування: "female-4a" -> "Персик"
   const FRONTEND_TO_SHEETS: Record<string, string> = {
     "female-4a": "Персик",
-    "female-4b": "Зелёная",
+    "female-4b": "Зелена",
     "male-8": "Бордо",
-    "mixed-8": "Синяя"
+    "mixed-8": "Синя"
   };
   const body = {
     action: "createBooking",

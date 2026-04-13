@@ -130,7 +130,7 @@ export const DICTIONARY = {
       },
       {
         id: "female-4b",
-        name: "Зелёная — жіноча кімната",
+        name: "Зелена — жіноча кімната",
         desc: "Друга затишна жіноча кімната. Вікна на двір, тихо вночі. Стелі 4 м, ортопедичні матраци, свіжа білизна, локери.",
         capacity: "4 місця",
       },
@@ -142,7 +142,7 @@ export const DICTIONARY = {
       },
       {
         id: "mixed-8",
-        name: "Синяя — змішана кімната",
+        name: "Синя — змішана кімната",
         desc: "Світла кімната з кондиціонером. Високі стелі, ортопедичні матраци, індивідуальні локери. Тут переважно сон і робота.",
         capacity: "8 місць",
       },
@@ -275,7 +275,7 @@ export const DICTIONARY = {
       },
       {
         id: "female-4b",
-        name: "Zelёnaya — Women's Room",
+        name: "Green — Women's Room",
         desc: "Second cozy women's room. Courtyard-facing windows, quiet at night. 4m ceilings, orthopedic mattresses, fresh linen, lockers.",
         capacity: "4 beds",
       },
@@ -287,7 +287,7 @@ export const DICTIONARY = {
       },
       {
         id: "mixed-8",
-        name: "Sinyaya — Mixed Room",
+        name: "Blue — Mixed Room",
         desc: "Bright room with AC. High ceilings, orthopedic mattresses, individual lockers. Mostly for sleep and work.",
         capacity: "8 beds",
       },
