@@ -32,7 +32,7 @@ export function TrustSection() {
               </li>
             ))}
           </ul>
-          {(dict.trust as any).googleReviewsLink && (
+          {dict.trust.googleReviewsLink && (
             <div className="mt-10 text-center">
               <a
                 href="https://maps.app.goo.gl/YourRealLinkHere" // Replace with actual if known, or leave as placeholder
@@ -40,7 +40,7 @@ export function TrustSection() {
                 rel="noopener noreferrer"
                 className="text-xs font-medium uppercase tracking-wider text-[#f4d03f]/70 transition hover:text-[#f4d03f]"
               >
-                {(dict.trust as any).googleReviewsLink} →
+                {dict.trust.googleReviewsLink} →
               </a>
             </div>
           )}

@@ -5,7 +5,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function HostSection() {
   const { dict } = useLanguage();
-  const content = (dict as any).hostBlock;
+  const content = dict.hostBlock;
 
   if (!content) return null;
 
