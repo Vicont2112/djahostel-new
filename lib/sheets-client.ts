@@ -16,6 +16,10 @@ export type AvailabilityRoom = {
   available: boolean;
   pricePerNight: number;
   currency: string;
+  /** Кількість доступних ліжок у кімнаті (з Sheets) */
+  availableBeds?: number;
+  /** Загальна кількість ліжок у кімнаті */
+  totalBeds?: number;
 };
 
 export type AvailabilityResult = {
@@ -66,12 +70,14 @@ function getBedPrefix(roomName: string): string {
 }
 
 /**
- * Отримання шахматки (на 90 днів).
+ * Отримання шахматки для вказаного діапазону дат.
  * API повертає 24 окремих ліжка — агрегуємо в 4 кімнати.
  */
-export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult> {
-  // Fetch individual beds (no groupBy)
-  const url = `${SHEETS_WEBAPP_BASE_URL}?action=getAvailability`;
+export async function fetchAvailabilityFromSheets(
+  checkIn: string,
+  checkOut: string,
+): Promise<AvailabilityResult> {
+  const url = `${SHEETS_WEBAPP_BASE_URL}?action=getAvailability&checkIn=${checkIn}&checkOut=${checkOut}`;
   const res = await fetch(url, { method: "GET", next: { revalidate: 60 } });
   
   if (!res.ok) {
@@ -124,12 +130,7 @@ export async function fetchAvailabilityFromSheets(): Promise<AvailabilityResult>
     availableBeds: grp.availableBeds,
   }));
 
-  return { 
-    rooms: mappedRooms, 
-    source: "apps-script",
-    checkIn: "", 
-    checkOut: ""
-  } as AvailabilityResult;
+  return { rooms: mappedRooms, source: "apps-script", checkIn, checkOut };
 }
 
 /**

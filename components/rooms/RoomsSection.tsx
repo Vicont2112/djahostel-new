@@ -3,6 +3,7 @@
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { useBooking } from "@/components/providers/BookingProvider";
 import { ROOMS_CATALOG } from "@/lib/rooms-catalog";
+import { contacts } from "@/lib/site-content";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +12,8 @@ export function RoomsSection() {
   const { availability, availabilityLoading, checkIn, checkOut } = useBooking();
 
   const byId = new Map(availability?.rooms.map((r) => [r.id, r]) ?? []);
+  const allBooked = availability != null && !availabilityLoading &&
+    availability.rooms.every((r) => !r.available);
 
   return (
     <section
@@ -35,6 +38,24 @@ export function RoomsSection() {
 
         {availabilityLoading && (
           <p className="mt-8 text-sm text-muted">{dict.roomsSection.loading}</p>
+        )}
+
+        {allBooked && (
+          <div className="mt-8 rounded-2xl border border-olive-muted/40 bg-card px-5 py-4 text-sm text-muted sm:flex sm:items-center sm:justify-between sm:gap-6">
+            <p>
+              {locale === "ua"
+                ? "На обрані дати всі місця зайняті. Спробуйте інші дати або напишіть нам — іноді є варіанти, яких немає в системі."
+                : "All beds are booked for these dates. Try other dates or message us — we sometimes have options not shown here."}
+            </p>
+            <a
+              href={contacts.telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-accent/90 px-4 py-2 text-sm font-medium text-white transition hover:bg-accent-hover sm:mt-0"
+            >
+              {locale === "ua" ? "Написати у Telegram" : "Message on Telegram"}
+            </a>
+          </div>
         )}
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -88,7 +109,7 @@ export function RoomsSection() {
                         }
                       >
                         {available
-                          ? `${(live as Record<string, unknown>)?.availableBeds ?? "?"} ${locale === "ua" ? "з" : "of"} ${(live as Record<string, unknown>)?.totalBeds ?? "?"} ${dict.roomsSection.available}`
+                          ? `${live?.availableBeds ?? "?"} ${locale === "ua" ? "з" : "of"} ${live?.totalBeds ?? "?"} ${dict.roomsSection.available}`
                           : dict.roomsSection.booked}
                       </p>
                     </div>

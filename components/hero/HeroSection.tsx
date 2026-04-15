@@ -19,7 +19,9 @@ export function HeroSection() {
     refreshAvailability,
   } = useBooking();
 
-  const freeCount = availability?.rooms.filter((r) => r.available).length ?? 0;
+  const freeRooms = availability?.rooms.filter((r) => r.available).length ?? 0;
+  const freeBeds = availability?.rooms.reduce((sum, r) => sum + (r.availableBeds ?? 0), 0) ?? 0;
+  const totalBeds = availability?.rooms.reduce((sum, r) => sum + (r.totalBeds ?? 0), 0) || 24;
 
   return (
     <section
@@ -49,11 +51,19 @@ export function HeroSection() {
           <p className="mt-5 max-w-md text-base font-normal leading-relaxed text-[#ebe6dc]/95 sm:text-lg">
             {dict.hero.subtitle}
           </p>
-          {dict.hero.warmIntro && (
-            <p className="mt-6 max-w-lg font-serif text-lg italic leading-relaxed text-[#f4d03f]/80 sm:text-xl">
-              {dict.hero.warmIntro}
-            </p>
-          )}
+
+          {/* Trust badges */}
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-[#faf8f4]/90 backdrop-blur-sm">
+              {dict.trustFacts.bookingRating} {dict.trustFacts.ratingLabel}
+            </span>
+            <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-[#faf8f4]/90 backdrop-blur-sm">
+              {dict.trustFacts.longStayShare} {dict.trustFacts.stayLabel}
+            </span>
+            <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-[#faf8f4]/90 backdrop-blur-sm">
+              {dict.trustFacts.quietHours} {dict.trustFacts.quietLabel}
+            </span>
+          </div>
         </div>
 
         <MiniCalendar
@@ -63,25 +73,47 @@ export function HeroSection() {
           onCheckAvailability={() => refreshAvailability()}
         />
 
-        <div className="min-h-[2.75rem] text-sm leading-relaxed text-[#e8e3da]/90">
-          {loading && <p>{locale === "ua" ? "Глядаємо вільні місця…" : "Checking availability…"}</p>}
+        <div className="flex min-h-[2.75rem] flex-col gap-3 text-sm leading-relaxed text-[#e8e3da]/90">
+          {loading && (
+            <p>{locale === "ua" ? "Глядаємо вільні місця…" : "Checking availability…"}</p>
+          )}
           {error && <p className="text-[#f5d4c8]">{error}</p>}
           {!loading && !error && availability && (
-            <p>
-              {freeCount > 0 ? (
-                <>
-                  {locale === "ua" ? "На обрані дати є варіанти: " : "Options available for these dates: "}
-                  <span className="font-medium text-[#faf8f4]">
-                    {freeCount} {locale === "ua" ? "з" : "of"} {availability.rooms.length}
-                  </span>
-                  {availability.source === "mock" && (
-                    <span className="text-[#dcd5c9]/80"> ({locale === "ua" ? "демо" : "demo"})</span>
-                  )}
-                </>
-              ) : (
-                <>{locale === "ua" ? "На ці дати в демо немає вільних місць — спробуйте інші дати." : "No availability for these dates in demo — try other dates."}</>
+            <>
+              <p>
+                {freeRooms > 0 ? (
+                  <>
+                    {locale === "ua" ? "Вільно на обрані дати: " : "Available for these dates: "}
+                    <span className="font-medium text-[#faf8f4]">
+                      {availability.source === "mock"
+                        ? `${freeRooms} ${locale === "ua" ? "з 4 кімнат" : "of 4 rooms"}`
+                        : `${freeBeds} ${locale === "ua" ? `з ${totalBeds} місць` : `of ${totalBeds} beds`}`}
+                    </span>
+                    {availability.source === "mock" && (
+                      <span className="text-[#dcd5c9]/80">
+                        {" "}({locale === "ua" ? "демо" : "demo"})
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {locale === "ua"
+                      ? "На ці дати немає вільних місць — спробуйте інші дати."
+                      : "No availability for these dates — try other dates."}
+                  </>
+                )}
+              </p>
+
+              {freeRooms > 0 && (
+                <a
+                  href="#book"
+                  className="inline-flex w-fit items-center gap-1.5 rounded-xl bg-accent/95 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-hover"
+                >
+                  {locale === "ua" ? "Обрати кімнату та забронювати" : "Choose a room & book"}
+                  <span aria-hidden>→</span>
+                </a>
               )}
-            </p>
+            </>
           )}
         </div>
       </div>

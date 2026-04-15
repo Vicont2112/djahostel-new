@@ -4,26 +4,10 @@ import type { AvailabilityResult, IsoDate } from "@/lib/sheets-client";
 const NIGHTLY_SHORT_STAY = 350;
 
 const MOCK_ROOMS = [
-  {
-    id: "female-4a",
-    name: "Жіночий номер (4 ліжка)",
-    pricePerNight: NIGHTLY_SHORT_STAY,
-  },
-  {
-    id: "female-4b",
-    name: "Жіночий номер (4 ліжка), друга кімната",
-    pricePerNight: NIGHTLY_SHORT_STAY,
-  },
-  {
-    id: "male-8",
-    name: "Чоловічий номер (8 ліжок)",
-    pricePerNight: NIGHTLY_SHORT_STAY,
-  },
-  {
-    id: "mixed-8",
-    name: "Змішаний номер (8 ліжок)",
-    pricePerNight: NIGHTLY_SHORT_STAY,
-  },
+  { id: "female-4a", name: "Жіночий номер (4 ліжка)",          pricePerNight: NIGHTLY_SHORT_STAY, totalBeds: 4 },
+  { id: "female-4b", name: "Жіночий номер (4 ліжка), друга",   pricePerNight: NIGHTLY_SHORT_STAY, totalBeds: 4 },
+  { id: "male-8",    name: "Чоловічий номер (8 ліжок)",         pricePerNight: NIGHTLY_SHORT_STAY, totalBeds: 8 },
+  { id: "mixed-8",   name: "Змішаний номер (8 ліжок)",          pricePerNight: NIGHTLY_SHORT_STAY, totalBeds: 8 },
 ] as const;
 
 function hashDates(checkIn: IsoDate, checkOut: IsoDate): number {
@@ -44,13 +28,19 @@ export function getMockAvailability(
   checkOut: IsoDate,
 ): AvailabilityResult {
   const seed = hashDates(checkIn, checkOut);
-  const rooms = MOCK_ROOMS.map((r, i) => ({
-    id: r.id,
-    name: r.name,
-    available: (seed + i) % 3 !== 0,
-    pricePerNight: r.pricePerNight,
-    currency: "UAH",
-  }));
+  const rooms = MOCK_ROOMS.map((r, i) => {
+    const available = (seed + i) % 3 !== 0;
+    const availableBeds = available ? Math.max(1, r.totalBeds - ((seed + i) % r.totalBeds)) : 0;
+    return {
+      id: r.id,
+      name: r.name,
+      available,
+      pricePerNight: r.pricePerNight,
+      currency: "UAH",
+      totalBeds: r.totalBeds,
+      availableBeds,
+    };
+  });
   return {
     checkIn,
     checkOut,

@@ -32,10 +32,10 @@ export function TrustSection() {
               </li>
             ))}
           </ul>
-          {dict.trust.googleReviewsLink && (
+          {contacts.googleMapsUrl && (
             <div className="mt-10 text-center">
               <a
-                href="https://maps.app.goo.gl/YourRealLinkHere" // Replace with actual if known, or leave as placeholder
+                href={contacts.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-medium uppercase tracking-wider text-[#f4d03f]/70 transition hover:text-[#f4d03f]"
@@ -72,7 +72,14 @@ export function TrustSection() {
                     key={row.label}
                     className="border-b border-olive-muted/30 last:border-0"
                   >
-                    <td className="py-3 pr-4 text-muted">{row.label}</td>
+                    <td className="py-3 pr-4 text-muted">
+                      {row.label}
+                      {"savings" in row && row.savings && (
+                        <span className="ml-2 rounded-full bg-olive-muted/30 px-2 py-0.5 text-xs font-medium text-olive-deep">
+                          {row.savings}
+                        </span>
+                      )}
+                    </td>
                     <td className="py-3 text-right font-medium text-foreground">
                       {row.price} {locale === "ua" ? "грн" : "UAH"}
                     </td>

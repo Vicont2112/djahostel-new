@@ -34,7 +34,7 @@ export async function GET(request: Request) {
 
   try {
     if (isSheetsConfigured()) {
-      const data = await fetchAvailabilityFromSheets();
+      const data = await fetchAvailabilityFromSheets(checkIn, checkOut);
       return NextResponse.json(data);
     }
   } catch (e) {

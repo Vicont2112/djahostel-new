@@ -46,7 +46,3 @@ export const ROOMS_CATALOG: RoomCatalogEntry[] = [
     capacityLabel: "8 місць",
   },
 ];
-
-export function catalogById(): Map<string, RoomCatalogEntry> {
-  return new Map(ROOMS_CATALOG.map((r) => [r.id, r]));
-}

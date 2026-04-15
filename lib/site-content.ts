@@ -10,10 +10,10 @@ export const DICTIONARY = {
         "Тихий хостел у центрі Києва (~12 хв від м. Золоті Ворота). Спокійно після 22:00, власник поруч. Залишайтесь на тижні й місяці — як вдома.",
     },
     hero: {
-      eyebrow: "Київ · вул. Січових Стрільців, 14",
-      title: "Dja Hostel — тихий хостел у центрі Києва",
+      eyebrow: "Dja Hostel · вул. Січових Стрільців, 14, Київ",
+      title: "Приїдете на тиждень. Лишитесь на місяць.",
       subtitle:
-        "Приїхали на кілька ночей. Залишились на місяці. Тиша після 22:00, господар на місці, затишок як вдома — якщо ви цінуєте спокій, вам тут сподобається.",
+        "Тиша після 22:00, господар поруч, затишок як вдома. Понад 60% гостей переїжджають до нас надовго — не тому що ми просили, а тому що добре спати й відчувати безпеку.",
       warmIntro: "Ти вже тут — і це вже головне. Видихни. Залиш сумку, завари чай і трохи сповільнись. Це простір для тих, хто цінує сон, порядок і тихих сусідів — на одну ніч або на довше.",
     },
     stayStory: {
@@ -98,8 +98,8 @@ export const DICTIONARY = {
     ],
     priceTiers: [
       { label: "1–6 ночей", price: 350 },
-      { label: "7–29 ночей", price: 280 },
-      { label: "30+ ночей", price: 230 },
+      { label: "7–29 ночей", price: 280, savings: "−20%" },
+      { label: "30+ ночей", price: 230, savings: "−34%" },
     ],
     trustQuotes: [
       {
@@ -155,10 +155,10 @@ export const DICTIONARY = {
         "A quiet place to stay in central Kyiv (~12 min from Zoloti Vorota). Calm, clean, set up for real life. 9.2 on Booking.com.",
     },
     hero: {
-      eyebrow: "Kyiv · 14 Sichovykh Striltsiv St",
-      title: "Dja Hostel — Quiet Place in Central Kyiv",
+      eyebrow: "Dja Hostel · 14 Sichovykh Striltsiv St, Kyiv",
+      title: "Come for a Week. Stay for a Month.",
       subtitle:
-        "They came for a few nights. Stayed for months. Quiet after 22:00, owner on-site, feels like home — if you value peace, you'll love it here.",
+        "Quiet after 22:00, owner on-site, feels like home. Over 60% of guests move in long-term — not because we asked, but because sleeping well and feeling safe changes things.",
       warmIntro: "You made it. Take a breath. Drop your bag, make some tea, and slow down. This place is for people who value sleep, order, and normal neighbours — whether it's for one night or a longer stay.",
     },
     stayStory: {
@@ -243,8 +243,8 @@ export const DICTIONARY = {
     ],
     priceTiers: [
       { label: "1–6 nights", price: 350 },
-      { label: "7–29 nights", price: 280 },
-      { label: "30+ nights", price: 230 },
+      { label: "7–29 nights", price: 280, savings: "−20%" },
+      { label: "30+ nights", price: 230, savings: "−34%" },
     ],
     trustQuotes: [
       {
@@ -304,6 +304,10 @@ export const contacts = {
   instagramUser: "dja_hostel",
   instagramUrl: "https://www.instagram.com/dja_hostel/",
   bookingUrl: "https://www.booking.com/Share-2X2k0Q",
+  /** Реальне посилання на Google Maps / Google Reviews для хостелу.
+   *  Залишіть порожнім ("") щоб приховати кнопку "Дивитись більше на Google Reviews".
+   *  Приклад: "https://maps.app.goo.gl/XXXXXXXXXXXXXXXXX" */
+  googleMapsUrl: "https://maps.app.goo.gl/11a1p4C3NKhkdZXW8",
 } as const;
 
 export const address = {
