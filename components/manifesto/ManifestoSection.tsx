@@ -77,7 +77,7 @@ export function ManifestoSection() {
               </h4>
               <p className="text-sm font-light leading-relaxed text-white/60">
                 У нас нормально не вітатися вдесяте за день, якщо ви зайняті. 
-                Ми не нав'язуємо «ком'юніті» — ми даємо простір бути собою.
+                Ми не нав&apos;язуємо «ком&apos;юніті» — ми даємо простір бути собою.
               </p>
             </div>
             <div>
