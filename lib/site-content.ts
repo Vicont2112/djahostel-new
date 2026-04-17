@@ -5,16 +5,16 @@
 export const DICTIONARY = {
   ua: {
     siteMeta: {
-      title: "Dja Hostel Київ — тихий хостел у центрі | 8.9★ Booking.com",
+      title: "Dja Hostel — Тихе місце для справжнього життя в центрі Києва",
       description:
-        "Тихий хостел у центрі Києва (~12 хв від м. Золоті Ворота). Спокійно після 22:00, власник поруч. Залишайтесь на тижні й місяці — як вдома.",
+        "Спокійне, чисте та налаштоване для життя місце в центрі Києва. Багато гостей приїжджають на кілька ночей, а залишаються на місяці. Власник на місці 24/7. 8.9 на Booking.com.",
     },
     hero: {
       eyebrow: "Dja Hostel · вул. Січових Стрільців, 14, Київ",
-      title: "Приїдете на тиждень. Лишитесь на місяць.",
+      title: "Тихе місце для справжнього життя.",
       subtitle:
-        "Тиша після 22:00, господар поруч, затишок як вдома. Понад 60% гостей переїжджають до нас надовго — не тому що ми просили, а тому що добре спати й відчувати безпеку.",
-      warmIntro: "Ти вже тут — і це вже головне. Видихни. Залиш сумку, завари чай і трохи сповільнись. Це простір для тих, хто цінує сон, порядок і тихих сусідів — на одну ніч або на довше.",
+        "Спокійно, чисто і все налаштовано для життя в центрі міста. Багато хто заходить до нас на пару ночей, а залишається на місяці. Власник на місці 24/7.",
+      warmIntro: "Видихни. Ти вже тут. Це простір для тих, хто цінує спокій, порядок і тихих сусідів — на одну ніч або на довше. Тут все просто, як вдома.",
     },
     stayStory: {
       title: "Приїхали на кілька ночей. Залишились на місяці.",
@@ -150,16 +150,16 @@ export const DICTIONARY = {
   },
   en: {
     siteMeta: {
-      title: "Dja Hostel Kyiv — Quiet Place to Stay in Central Kyiv",
+      title: "Dja Hostel — A Quiet Place to Stay in Central Kyiv",
       description:
-        "A quiet place to stay in central Kyiv (~12 min from Zoloti Vorota). Calm, clean, set up for real life. 8.9 on Booking.com.",
+        "Calm, clean, and set up for real life in central Kyiv. Many guests come for a few nights and stay for months. Owner on-site 24/7. 8.9 on Booking.com.",
     },
     hero: {
       eyebrow: "Dja Hostel · 14 Sichovykh Striltsiv St, Kyiv",
-      title: "Come for a Week. Stay for a Month.",
+      title: "A Quiet Place for Real Life.",
       subtitle:
-        "Quiet after 22:00, owner on-site, feels like home. Over 60% of guests move in long-term — not because we asked, but because sleeping well and feeling safe changes things.",
-      warmIntro: "You made it. Take a breath. Drop your bag, make some tea, and slow down. This place is for people who value sleep, order, and normal neighbours — whether it's for one night or a longer stay.",
+        "Calm, clean, and set up for real life in the heart of Kyiv. Many guests come for a few nights and stay for months. Owner on-site 24/7.",
+      warmIntro: "Take a breath. You are home. This is a place for those who value peace, order, and quiet neighbors — for one night or much longer.",
     },
     stayStory: {
       title: "They came for a few nights. Stayed for months.",
