@@ -5,7 +5,7 @@
 export const DICTIONARY = {
   ua: {
     siteMeta: {
-      title: "Dja Hostel Київ — тихий хостел у центрі | 9.2★ Booking.com",
+      title: "Dja Hostel Київ — тихий хостел у центрі | 8.9★ Booking.com",
       description:
         "Тихий хостел у центрі Києва (~12 хв від м. Золоті Ворота). Спокійно після 22:00, власник поруч. Залишайтесь на тижні й місяці — як вдома.",
     },
@@ -42,7 +42,7 @@ export const DICTIONARY = {
     hostBlock: {
       title: "Віктор — власник і сусід",
       body: "Я живу тут постійно, тому завжди на місці, якщо щось потрібно. Все працює на взаємній повазі. Будьте уважні до інших — і вам тут сподобається. Залишайте міські драми за дверима. Тут ми просто живемо.",
-      signature: "— Віктор, власник Dja Hostel",
+      signature: "— Віктор, власник і сусід",
     },
     nav: {
       trust: "Довіра",
@@ -62,7 +62,7 @@ export const DICTIONARY = {
       replyHint: "У Telegram зазвичай відповідаємо протягом ~15 хвилин.",
     },
     trustFacts: {
-      bookingRating: "9.2★",
+      bookingRating: "8.9★",
       longStayShare: "понад 60%",
       beds: 24,
       quietHours: "22:00–07:00",
@@ -152,7 +152,7 @@ export const DICTIONARY = {
     siteMeta: {
       title: "Dja Hostel Kyiv — Quiet Place to Stay in Central Kyiv",
       description:
-        "A quiet place to stay in central Kyiv (~12 min from Zoloti Vorota). Calm, clean, set up for real life. 9.2 on Booking.com.",
+        "A quiet place to stay in central Kyiv (~12 min from Zoloti Vorota). Calm, clean, set up for real life. 8.9 on Booking.com.",
     },
     hero: {
       eyebrow: "Dja Hostel · 14 Sichovykh Striltsiv St, Kyiv",
@@ -187,7 +187,7 @@ export const DICTIONARY = {
     hostBlock: {
       title: "Victor — Owner & Neighbour",
       body: "I live here full-time, so I'm always around if you need anything. Everything works on mutual respect. Be mindful of others — and you'll love it here. Leave the city drama at the door. Here, we just live.",
-      signature: "— Victor, owner of Dja Hostel",
+      signature: "— Victor, owner & neighbour",
     },
     nav: {
       trust: "Trust",
@@ -207,7 +207,7 @@ export const DICTIONARY = {
       replyHint: "Usually replies in Telegram within ~15 minutes.",
     },
     trustFacts: {
-      bookingRating: "9.2★",
+      bookingRating: "8.9★",
       longStayShare: "over 60%",
       beds: 24,
       quietHours: "22:00–07:00",

@@ -51,6 +51,9 @@ export function HeroSection() {
           <p className="mt-5 max-w-md text-base font-normal leading-relaxed text-[#ebe6dc]/95 sm:text-lg">
             {dict.hero.subtitle}
           </p>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#dcd5c9]/80">
+            {dict.hero.warmIntro}
+          </p>
 
           {/* Trust badges */}
           <div className="mt-5 flex flex-wrap gap-2">

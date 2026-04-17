@@ -32,9 +32,9 @@ export function JsonLd() {
     "priceRange": "230-350 UAH",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "9.2",
+      "ratingValue": "8.9",
       "bestRating": "10",
-      "ratingCount": "100"
+      "ratingCount": "101"
     },
     "amenityFeature": [
       {"@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true},

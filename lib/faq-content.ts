@@ -22,6 +22,18 @@ export const faqContent = {
       {
         q: "Де саме ви знаходитесь?",
         a: "Історичний центр Києва, вул. Січових Стрільців, 14. Це близько до Подолу та Золотих Воріт."
+      },
+      {
+        q: "Який Wi-Fi у хостелі?",
+        a: "Безкоштовний Wi-Fi по всьому хостелу. Підходить для роботи та відеодзвінків."
+      },
+      {
+        q: "Є паркування поруч?",
+        a: "Платне паркування є на вулиці та поряд. Безкоштовного виділеного паркування для гостей немає."
+      },
+      {
+        q: "Можна залишити речі після виїзду?",
+        a: "Так. Є камера схову — залишайте речі безкоштовно і повертайтесь у зручний час."
       }
     ]
   },
@@ -48,6 +60,18 @@ export const faqContent = {
       {
         q: "Where is the hostel located?",
         a: "In the historic centre of Kyiv, at 14 Sichovykh Striltsiv St. Close to Podil and Zoloti Vorota."
+      },
+      {
+        q: "Is there Wi-Fi?",
+        a: "Free Wi-Fi throughout the hostel. Fast enough for remote work and video calls."
+      },
+      {
+        q: "Is there parking nearby?",
+        a: "Paid street parking is available nearby. We don't have a dedicated free parking lot for guests."
+      },
+      {
+        q: "Can I leave my bags after check-out?",
+        a: "Yes. We have a free luggage storage — leave your bags and come back whenever it's convenient."
       }
     ]
   }
