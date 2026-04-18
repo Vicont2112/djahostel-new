@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Lora } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
@@ -7,17 +7,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 
 const GA_ID = "G-MPM30EPXQ8";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-});
+
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://djahostel.com"),
@@ -70,8 +66,9 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className={`${dmSans.variable} ${lora.variable} font-sans antialiased`}
+        className={`${outfit.variable} font-sans antialiased bg-background text-foreground`}
       >
+
         <GoogleAnalytics gaId={GA_ID} />
         <LanguageProvider>
           <JsonLd />
