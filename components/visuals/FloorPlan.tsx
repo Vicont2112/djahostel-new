@@ -10,19 +10,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-interface Bed {
-  bedId: string;
-  bedName: string;
-  isAvailable: boolean;
-}
-
-interface Room {
-  id: string;
-  name: string;
-  availableBeds: number;
-  totalBeds: number;
-  beds?: Bed[];
-}
+import { AvailabilityRoom } from '@/lib/sheets-client';
 
 const roomStyles: Record<string, { color: string; glow: string }> = {
   'female-4a': { color: 'border-accent-peach/30 bg-accent-peach/5', glow: 'shadow-[0_0_30px_rgba(251,146,60,0.1)]' },
@@ -39,7 +27,7 @@ export const FloorPlan = () => {
     setIsMounted(true);
   }, []);
 
-  const displayRooms = (availability?.rooms as unknown as Room[]) || [];
+  const displayRooms = (availability?.rooms as AvailabilityRoom[]) || [];
 
   return (
     <section className="relative w-full py-32 px-4 overflow-hidden bg-background">
@@ -113,7 +101,7 @@ export const FloorPlan = () => {
                           </h3>
                           <div className={cn(
                             "w-2 h-2 rounded-full animate-pulse shadow-[0_0_10px_currentColor]",
-                            room.availableBeds > 0 ? "text-accent-peach" : "text-white/20"
+                            (room.availableBeds ?? 0) > 0 ? "text-accent-peach" : "text-white/20"
                           )} />
                         </div>
 
@@ -140,7 +128,7 @@ export const FloorPlan = () => {
                         </div>
 
                         <div className="mt-10 text-[9px] font-black text-white/20 uppercase tracking-[.4em] relative z-10">
-                           {room.totalBeds} BEDS • {room.availableBeds} FREE
+                           {room.totalBeds ?? 0} BEDS • {room.availableBeds ?? 0} FREE
                         </div>
                       </motion.div>
                     );

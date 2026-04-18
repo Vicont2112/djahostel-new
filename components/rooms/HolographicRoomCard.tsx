@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Share2, Star, Users } from 'lucide-react';
+import { Share2, Star } from 'lucide-react';
 
 interface RoomCardProps {
   title: string;
@@ -14,11 +14,6 @@ interface RoomCardProps {
 
 export const HolographicRoomCard = ({ title, price, type, tags }: RoomCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
   
   // Mouse positioning for tilt
   const x = useMotionValue(0);

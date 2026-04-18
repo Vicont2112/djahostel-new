@@ -16,17 +16,19 @@ export type AvailabilityRoom = {
   available: boolean;
   pricePerNight: number;
   currency: string;
-  /** Кількість доступних ліжок у кімнаті (з Sheets) */
+  /** Кількість доступних ліжок у кімнаті (з Sheets/Supabase) */
   availableBeds?: number;
   /** Загальна кількість ліжок у кімнаті */
   totalBeds?: number;
+  /** Детальна інформація про кожне ліжко (для FloorPlan) */
+  beds?: Array<{ bedId: string; bedName: string; isAvailable: boolean }>;
 };
 
 export type AvailabilityResult = {
   checkIn: IsoDate;
   checkOut: IsoDate;
   rooms: AvailabilityRoom[];
-  source: "apps-script" | "mock";
+  source: "apps-script" | "mock" | "supabase";
 };
 
 export type BookingPayload = {

@@ -8,11 +8,6 @@ import { Search, SlidersHorizontal, MapPin } from "lucide-react";
 export function HeroSection() {
   const { dict } = useLanguage();
   const searchRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Spotlight mouse position for the search bar
   const mouseX = useMotionValue(0);

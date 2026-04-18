@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { address, contacts } from "@/lib/site-content";
+import { address } from "@/lib/site-content";
 import { motion } from "framer-motion";
 import { MapPin, Navigation, ExternalLink } from "lucide-react";
 
